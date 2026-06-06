@@ -8,7 +8,7 @@ A Docker image for running [OpenClaw](https://www.npmjs.com/package/openclaw) AI
 ## What's Included
 
 - **Base**: `node:22-slim` (Debian)
-- **OpenClaw**: Latest from npm (`openclaw@latest`) with `matrix-bot-sdk`
+- **OpenClaw**: Pinned npm release (`OPENCLAW_VERSION` build-arg, default `2026.6.1`) with `matrix-bot-sdk`; bumped automatically by Renovate
 - **Tools**: `jq`, `git`, `curl`, `openssh-client`, `gnupg`, `python3`, `gh` (GitHub CLI)
 
 ## Build
