@@ -10,5 +10,7 @@ RUN apt-get update && apt-get install -y \
     && apt-get update && apt-get install -y gh \
     && rm -rf /var/lib/apt/lists/*
 
-RUN npm install -g openclaw@latest \
+# renovate: datasource=npm depName=openclaw
+ARG OPENCLAW_VERSION=2026.6.1
+RUN npm install -g openclaw@${OPENCLAW_VERSION} \
     && cd /usr/local/lib/node_modules/openclaw && npm install matrix-bot-sdk
