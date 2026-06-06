@@ -2,6 +2,7 @@ FROM node:22-slim
 
 RUN apt-get update && apt-get install -y \
     jq git ca-certificates curl openssh-client gnupg python3 \
+    tini rclone poppler-utils unzip \
     && curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
        | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
     && chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
