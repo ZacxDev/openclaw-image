@@ -13,5 +13,10 @@ RUN apt-get update && apt-get install -y \
 
 # renovate: datasource=npm depName=openclaw
 ARG OPENCLAW_VERSION=2026.6.1
+# --legacy-peer-deps: node:22-slim ships npm 10.9.8, whose arborist crashes with
+# "Cannot read properties of null (reading 'edgesOut')" in #loadPeerSet when adding
+# a package inside openclaw's already-populated global node_modules. matrix-bot-sdk
+# declares no peerDependencies, so skipping peer resolution yields an identical tree
+# while avoiding the buggy code path. Keeps matrix-bot-sdk resolvable by openclaw at runtime.
 RUN npm install -g openclaw@${OPENCLAW_VERSION} \
-    && cd /usr/local/lib/node_modules/openclaw && npm install matrix-bot-sdk
+    && cd /usr/local/lib/node_modules/openclaw && npm install --legacy-peer-deps matrix-bot-sdk
