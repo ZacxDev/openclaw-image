@@ -1,3 +1,5 @@
+
+
 # OpenClaw Container Image
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -14,7 +16,7 @@ A Docker image for running [OpenClaw](https://www.npmjs.com/package/openclaw) AI
 ## Build
 
 ```bash
-docker build -t openclaw:latest .
+docker build --build-arg OPENCLAW_VERSION=2026.6.1 -t openclaw:latest .
 ```
 
 ## Push to Registry
