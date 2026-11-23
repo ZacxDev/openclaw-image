@@ -31,6 +31,10 @@ jobs:
           fi
           echo "openclaw_version=$OPENCLAW_VERSION" >> "$GITHUB_OUTPUT"
           echo "Resolved OPENCLAW_VERSION=$OPENCLAW_VERSION"
+          # The version tag is rewritten by every rebuild of the same openclaw version (e.g. a
+          # base-image bump), so each build also gets an immutable <version>-<short sha> tag that
+          # a deploy can pin.
+          echo "short_sha=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
 
       - name: Lowercase image name
         id: image
@@ -55,6 +59,7 @@ jobs:
             OPENCLAW_VERSION=${{ steps.version.outputs.openclaw_version }}
           tags: |
             ${{ steps.image.outputs.name }}:${{ steps.version.outputs.openclaw_version }}
+            ${{ steps.image.outputs.name }}:${{ steps.version.outputs.openclaw_version }}-${{ steps.version.outputs.short_sha }}
             ${{ steps.image.outputs.name }}:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
